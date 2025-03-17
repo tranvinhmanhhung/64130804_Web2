@@ -1,12 +1,12 @@
 package Models;
 
-public class sinhvien {
+public class Sinhvien {
     private String mssv;
     private String hoTen;
     private boolean gioiTinh;
     private String namSinh; // Đúng với tên gọi trong Thymeleaf
 
-    public sinhvien(String mssv, String hoTen, boolean gioiTinh, String namSinh) {
+    public Sinhvien(String mssv, String hoTen, boolean gioiTinh, String namSinh) {
         this.mssv = mssv;
         this.hoTen = hoTen;
         this.gioiTinh = gioiTinh;
