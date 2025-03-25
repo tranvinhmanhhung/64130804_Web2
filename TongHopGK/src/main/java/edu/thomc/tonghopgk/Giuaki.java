@@ -30,9 +30,9 @@ public class Giuaki {
         model.addAttribute("page", page);
 
         if (page.equals("about")) {
-            model.addAttribute("mssv", "64130053");
-            model.addAttribute("hoVaTen", "Nguyễn Đức Anh");
-            model.addAttribute("namSinh", "2003");
+            model.addAttribute("mssv", "64130804");
+            model.addAttribute("hoVaTen", "Trần Vĩnh Mạnh Hưng");
+            model.addAttribute("namSinh", "2004");
             model.addAttribute("gioiTinh", "Nam");
         } else if (page.equals("list")) {
             model.addAttribute("studentModelList", students);
