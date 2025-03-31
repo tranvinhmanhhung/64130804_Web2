@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Glass morphism Profile Card</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="aboutMe.css" />
+
+</head>
+<body>
+<section class="aboutMe" th:fragment="aboutMe">
+    <div class="card1">
+        <div class="card">
+            <div class="left-container">
+                <img src="https://i.pinimg.com/736x/a0/e6/89/a0e689516d1971d0402a067efac3fc00.jpg" alt="Profile Image">
+                <h2 class="gradienttext">Trần Vĩnh Mạnh Hưng</h2>
+                <p>Lập trình viên</p>
+            </div>
+            <div class="right-container">
+                <h3 class="gradienttext">Profile</h3>
+                <table>
+                    <tr>
+                        <td >Tên :</td>
+                        <td th:text="${Ten}"></td>
+                    </tr>
+                    <tr>
+                        <td>Tuổi :</td>
+                        <td th:text="${Tuoi}"></td>
+                    </tr>
+                    <tr>
+                        <td>Số điện thoại :</td>
+                        <td th:text="${Sdt}"></td>
+                    </tr>
+                    <tr>
+                        <td>Email :</td>
+                        <td th:text="${Email}"></td>
+                    </tr>
+                    <tr>
+                        <td>Địa chỉ :</td>
+                        <td th:text="${Diachi}"></td>
+                    </tr>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

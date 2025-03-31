@@ -1,0 +1,128 @@
+@charset "UTF-8";
+body {
+    background-color: #f8f9fa;
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+    width:100% !important;
+    overflow: hidden;
+}
+
+header {
+    background-color: #343a40;
+    color: white;
+    padding: 20px 0;
+}
+nav{
+    width: 100% !important;
+}
+header h1 {
+    font-size: 2.5rem;
+    text-align: center;
+    font-weight: 600;
+}
+
+nav.navbar {
+    background-color: #495057;
+}
+
+nav .navbar-brand {
+    font-weight: 700;
+}
+
+nav .navbar-nav .nav-link {
+    color: white !important;
+    font-size: 1.1rem;
+}
+
+nav .navbar-nav .nav-link:hover {
+    background-color: #adb5bd;
+    color: #343a40 !important;
+}
+
+.sidebar {
+    background-color: #343a40;
+    color: white;
+    padding: 20px;
+    width: 250px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar h3 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.sidebar ul li {
+    margin-bottom: 10px;
+}
+
+.sidebar ul li a {
+    color: #adb5bd;
+    text-decoration: none;
+    font-size: 1.1rem;
+}
+
+.sidebar ul li a:hover {
+    color: white;
+    background-color: #495057;
+    padding-left: 10px;
+}
+
+.container-fluid{
+    height:calc(100vh - 200px) !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding:0 !important;
+    background-color: transparent;
+}
+.container-img {
+    background-image: url("https://i.pinimg.com/736x/08/43/c1/0843c18d3c4b9753019508274ca2704e.jpg");
+    background-size: cover;
+    background-position: center ;
+    height: 100px;
+    width: 100%;
+}
+
+.main-content {
+    flex: 1;
+    overflow:scroll;
+
+}
+.card {
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    background-color: #495057;
+    color: white;
+}
+
+.card-body {
+    background-color: white;
+    padding: 20px;
+}
+
+/* Footer */
+footer {
+    color: white;
+    text-align: center;
+    padding: 15px;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    background-color: #495057;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    transition: transform 0.3s ease-in-out;
+}
