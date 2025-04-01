@@ -22,5 +22,15 @@ public class Personal {
         return dtb;
     }
 
+    public void setMSSV(String MSSV) {
+        this.MSSV = MSSV;
+    }
 
+    public void setHoTen(String hoTen) {
+        this.hoTen = hoTen;
+    }
+
+    public void setDtb(double dtb) {
+        this.dtb = dtb;
+    }
 }

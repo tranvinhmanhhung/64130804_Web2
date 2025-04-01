@@ -75,6 +75,12 @@ nav .navbar-nav .nav-link:hover {
     padding-left: 10px;
 }
 
+.sidebar img{
+    height: 520px;
+    width: 210px;
+    padding-right: 10px;
+}
+
 .container-fluid{
     height:calc(100vh - 200px) !important;
     display: flex;

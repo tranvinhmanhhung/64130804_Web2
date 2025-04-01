@@ -12,17 +12,19 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <style>
         body {
-            color: #fff;
-            background: #63738a;
+            color: #2c3e50; /* Màu chữ tối hơn để nổi bật trên nền sáng */
+            background: #f0f4f8; /* Đồng bộ màu nền sáng với aboutMe */
             font-family: 'Roboto', sans-serif;
         }
         .form-control {
             height: 40px;
             box-shadow: none;
-            color: #969fa4;
+            color: #2c3e50; /* Màu chữ trong input */
+            border: 1px solid #d3dce6; /* Viền sáng hơn */
         }
         .form-control:focus {
-            border-color: #5cb85c;
+            border-color: #FF6B6B; /* Màu viền khi focus, đồng bộ với tông sáng */
+            box-shadow: 0 0 5px rgba(255, 107, 107, 0.5); /* Hiệu ứng sáng nhẹ */
         }
         .form-control, .btn {
             border-radius: 3px;
@@ -34,24 +36,25 @@
             font-size: 15px;
         }
         .signup-form h2 {
-            color: #636363;
+            color: #FF416C; /* Màu tiêu đề tươi sáng */
             margin: 0 0 15px;
             position: relative;
             text-align: center;
+            background-image: linear-gradient(to right, #FF416C, #FFAA85); /* Gradient đồng bộ */
+            -webkit-background-clip: text;
+            color: transparent;
         }
-
-
         .signup-form .hint-text {
-            color: #999;
+            color: #666; /* Màu gợi ý tối hơn một chút */
             margin-bottom: 30px;
             text-align: center;
         }
         .signup-form form {
-            color: #999;
-            border-radius: 3px;
+            color: #2c3e50; /* Màu chữ trong form */
+            border-radius: 10px; /* Bo góc nhẹ hơn */
             margin-bottom: 15px;
-            background: #f2f3f7;
-            box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.9); /* Nền sáng, đồng bộ với card */
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1); /* Bóng sáng hơn */
             padding: 30px;
         }
         .signup-form .form-group {
@@ -65,6 +68,12 @@
             font-weight: bold;
             min-width: 140px;
             outline: none !important;
+            background-image: linear-gradient(to right, #FF6B6B, #FFAA85); /* Gradient nút đồng bộ */
+            border: none;
+            color: #fff; /* Chữ trắng trên nút */
+        }
+        .signup-form .btn:hover {
+            background-image: linear-gradient(to right, #FFAA85, #FF6B6B); /* Đảo gradient khi hover */
         }
         .signup-form .row div:first-child {
             padding-right: 10px;
@@ -73,14 +82,14 @@
             padding-left: 10px;
         }
         .signup-form a {
-            color: #fff;
+            color: #FF6B6B; /* Màu liên kết tươi sáng */
             text-decoration: underline;
         }
         .signup-form a:hover {
             text-decoration: none;
         }
         .signup-form form a {
-            color: #5cb85c;
+            color: #FF416C; /* Màu liên kết trong form */
             text-decoration: none;
         }
         .signup-form form a:hover {
@@ -98,9 +107,8 @@
         <div class="form-group">
             <input type="number" class="form-control" name="dtb" placeholder="Điểm trung bình" required="required" min="0" max="10" step="0.1">
         </div>
-
         <div class="form-group">
-            <button type="submit" class="btn btn-success btn-lg btn-block">Đăng ký</button>
+            <button type="submit" class="btn btn-lg btn-block">Đăng ký</button>
         </div>
     </form>
 </div>

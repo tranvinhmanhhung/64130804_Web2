@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student & Topic Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+    <h1>Welcome to Student & Topic Dashboard</h1>
+    <nav>
+        <ul>
+            <li><a th:href="@{/}">Home</a></li>
+            <li><a th:href="@{/topics}">Topics</a></li>
+            <li><a th:href="@{/students}">Students</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <section id="content">
+        <h2>Dashboard Overview</h2>
+        <p>Select an option from the navigation menu to view details.</p>
+    </section>
+</main>
+
+<footer>
+    <p>&copy; 2025 Trần Vĩnh Mạnh Hưng - FIT.NTU</p>
+</footer>
+</body>
+</html>

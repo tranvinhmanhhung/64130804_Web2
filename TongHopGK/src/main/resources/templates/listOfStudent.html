@@ -8,59 +8,177 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
+            background-color: #f0f4f8; /* Đồng bộ màu nền sáng */
         }
 
         table {
             width: 80%;
             border-collapse: collapse;
-            background-color: #fff;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            margin-top:20px;
+            background-color: rgba(255, 255, 255, 0.9); /* Nền bảng sáng, đồng bộ với card */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Bóng sáng nhẹ */
+            margin-top: 20px;
             margin-bottom: 20px;
         }
 
         th, td {
             padding: 12px 20px;
             text-align: left;
-            border: 1px solid #ddd;
+            border: 1px solid #d3dce6; /* Viền sáng hơn, đồng bộ với form */
         }
 
         th {
-            background-color: #4CAF50;
+            background-image: linear-gradient(to right, #FF416C, #FFAA85); /* Gradient tiêu đề đồng bộ */
             color: white;
+            font-size: 18px;
         }
 
         tr:nth-child(even) {
-            background-color: #f2f2f2;
+            background-color: #f8f9fb; /* Màu nền sáng hơn cho hàng chẵn */
         }
 
         tr:hover {
-            background-color: #ddd;
+            background-color: #e6ecef; /* Màu hover sáng hơn */
         }
 
         td {
             font-size: 16px;
-            color: #555;
+            color: #2c3e50; /* Màu chữ tối để tương phản trên nền sáng */
         }
 
         th, td {
             font-size: 18px;
         }
+
+        button {
+            padding: 8px 16px;
+            border: none;
+            cursor: pointer;
+            color: white;
+            border-radius: 3px; /* Bo góc nhẹ */
+        }
+
+        button[onclick^="editUser"] {
+            background-image: linear-gradient(to right, #FF6B6B, #FFAA85); /* Gradient nút Sửa */
+        }
+
+        button[onclick^="deleteUser"] {
+            background-image: linear-gradient(to right, #FF416C, #FFAA85); /* Gradient nút Xóa */
+        }
+
+        button[type="submit"] {
+            background-image: linear-gradient(to right, #FF6B6B, #FFAA85); /* Gradient nút Lưu */
+        }
+
+        button[onclick^="cancelEdit"] {
+            background-image: linear-gradient(to right, #FF416C, #FFAA85); /* Gradient nút Hủy */
+        }
+
+        button:hover {
+            opacity: 0.9; /* Hiệu ứng hover nhẹ */
+        }
+
+        input {
+            padding: 5px;
+            border: 1px solid #d3dce6; /* Viền input sáng */
+            border-radius: 3px;
+            color: #2c3e50; /* Màu chữ input */
+        }
+
+        input:disabled {
+            background-color: #e6ecef; /* Nền input bị vô hiệu hóa */
+        }
     </style>
 </head>
 <body>
 <table>
-    <tr style="position: -webkit-sticky;position: sticky;top:0">
+    <tr style="position: -webkit-sticky; position: sticky; top: 0">
         <th>MSSV</th>
         <th>Họ và tên</th>
         <th>Điểm trung bình</th>
+        <th>Thao tác</th>
     </tr>
-    <tr th:each="user : ${dsSV}" th:object="${user}" >
+    <tr th:each="user : ${dsSV}" th:object="${user}">
         <td th:text="*{getMSSV1()}"></td>
         <td th:text="*{getHoTen1()}"></td>
         <td th:text="*{getDTB()}"></td>
+        <td>
+            <button th:attr="data-id=*{getMSSV1()}" onclick="editUser(event)">Sửa</button>
+            <button th:attr="data-id=*{getMSSV1()}" onclick="deleteUser(event)">Xóa</button>
+        </td>
     </tr>
 </table>
+<script>
+    function editUser(event) {
+        const row = event.target.closest('tr');
+        const mssvCell = row.cells[0];
+        const nameCell = row.cells[1];
+        const gpaCell = row.cells[2];
+
+        const mssv = mssvCell.textContent;
+        const name = nameCell.textContent;
+        const gpa = gpaCell.textContent;
+
+        mssvCell.innerHTML = `<input type="text" value="${mssv}" disabled name="mssv"/>`;
+        nameCell.innerHTML = `<input type="text" value="${name}" name="name"/>`;
+        gpaCell.innerHTML = `<input type="text" value="${gpa}" name="diem"/>`;
+
+        const nameInput = nameCell.querySelector('input[name="name"]');
+        const gpaInput = gpaCell.querySelector('input[name="diem"]');
+
+        nameInput.addEventListener('input', function() {
+            updateFormInputs(mssv, nameInput.value, gpaInput.value);
+        });
+
+        gpaInput.addEventListener('input', function() {
+            updateFormInputs(mssv, nameInput.value, gpaInput.value);
+        });
+
+        const actionCell = row.cells[3];
+        actionCell.innerHTML = `
+            <form method="POST" action="/save" onsubmit="submitForm(event)">
+                <input type="hidden" name="mssv" value="${mssv}" />
+                <input type="hidden" name="name" value="${name}" />
+                <input type="hidden" name="diem" value="${gpa}" />
+                <button type="submit">Lưu</button>
+                <button type="button" onclick="cancelEdit(event)">Hủy</button>
+            </form>
+        `;
+    }
+
+    function updateFormInputs(mssv, name, gpa) {
+        const form = document.querySelector('form[action="/save"]');
+        if (form) {
+            form.querySelector('input[name="mssv"]').value = mssv;
+            form.querySelector('input[name="name"]').value = name;
+            form.querySelector('input[name="diem"]').value = gpa;
+        }
+    }
+
+    function cancelEdit(event) {
+        location.reload();
+    }
+
+    function deleteUser(event) {
+        const row = event.target.closest('tr');
+        const mssv = row.cells[0].textContent;
+
+        fetch(`/delete/${mssv}`, {
+            method: 'DELETE',
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Xóa thành công!');
+                    row.remove();
+                } else {
+                    alert('Xóa không thành công!');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Có lỗi xảy ra!');
+            });
+    }
+</script>
 </body>
 </html>
