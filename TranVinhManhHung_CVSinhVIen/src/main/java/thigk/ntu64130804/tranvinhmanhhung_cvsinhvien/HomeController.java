@@ -52,7 +52,7 @@ public class HomeController {
     @GetMapping("/topic/new")
     public String addTopicForm(Model model) {
         model.addAttribute("topic", new Topic(0, "", "", 0, ""));
-        return "topicForm";
+        return "Topic/topicAddnew";
     }
 
     @PostMapping("/topic/save")
@@ -96,7 +96,7 @@ public class HomeController {
     @GetMapping("/student/new")
     public String addStudentForm(Model model) {
         model.addAttribute("student", new Student(0, "", 0));
-        return "studentForm";
+        return "Student/studentAddnew"; 
     }
 
     @PostMapping("/student/save")
