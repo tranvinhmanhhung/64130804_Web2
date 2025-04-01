@@ -4,6 +4,7 @@ import model.Student;
 import model.Topic;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 
 
@@ -26,7 +27,11 @@ public class HomeController {
     ));
 
     @GetMapping("/")
-    public String home() {
+    public String home(ModelMap model) {
+        model.addAttribute("Ten", "Trần Vĩnh Mạnh Hưng");
+        model.addAttribute("Tuoi", "21");
+        model.addAttribute("GioiTinh", "Nam");
+        model.addAttribute("DiaChi", "Vĩnh Thọ,Nha Trang");
         return "homePage";
     }
 
