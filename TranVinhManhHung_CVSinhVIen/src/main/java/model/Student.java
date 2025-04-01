@@ -22,4 +22,16 @@ public class Student {
     public int getGroupId() {
         return groupId;
     }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setGroupId(int groupId) {
+        this.groupId = groupId;
+    }
 }

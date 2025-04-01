@@ -34,4 +34,24 @@ public class Topic {
     public String getTopicType() {
         return topicType;
     }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setTopicName(String topicName) {
+        this.topicName = topicName;
+    }
+
+    public void setTopicDescription(String topicDescription) {
+        this.topicDescription = topicDescription;
+    }
+
+    public void setSupervisorId(int supervisorId) {
+        this.supervisorId = supervisorId;
+    }
+
+    public void setTopicType(String topicType) {
+        this.topicType = topicType;
+    }
 }
