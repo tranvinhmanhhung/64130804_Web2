@@ -9,7 +9,30 @@
 <body>
 <section id="content">
   <h2>Student List</h2>
-  <a th:href="@{/student/new}" class="btn btn-primary mb-3">Add New Student</a>
+
+  <!-- Form to Add New Student (shown only if showAddForm is true) -->
+  <div th:if="${showAddForm}" class="mb-4">
+    <h4>Add New Student</h4>
+    <form th:action="@{/student/save}" th:object="${newStudent}" method="post">
+      <input type="hidden" th:field="*{id}" value="0" />
+      <div class="row">
+        <div class="col-md-4 mb-3">
+          <label for="name" class="form-label">Name:</label>
+          <input type="text" th:field="*{name}" class="form-control" id="name" required />
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="topicId" class="form-label">Topic ID:</label>
+          <input type="number" th:field="*{topicId}" class="form-control" id="topicId" required />
+        </div>
+        <div class="col-md-4 mb-3 d-flex align-items-end">
+          <button type="submit" class="btn btn-primary me-2">Add Student</button>
+          <a th:href="@{/students}" class="btn btn-secondary">Cancel</a>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <!-- Student List Table -->
   <table class="table table-bordered">
     <thead>
     <tr>

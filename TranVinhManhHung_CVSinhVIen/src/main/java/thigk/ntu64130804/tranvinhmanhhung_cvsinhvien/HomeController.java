@@ -27,13 +27,8 @@ public class HomeController {
     @GetMapping("/")
     public String home(Model model) {
         model.addAttribute("Ten", "Trần Vĩnh Mạnh Hưng");
-        model.addAttribute("Tuoi", "21");
-        model.addAttribute("GioiTinh", "Nam");
-        model.addAttribute("DiaChi", "Vĩnh Thọ, Nha Trang");
         return "homePage";
     }
-
-
 
     @GetMapping("/topics")
     public String getTopics(Model model) {
@@ -46,7 +41,7 @@ public class HomeController {
     public String viewTopic(@PathVariable("id") int id, Model model) {
         Topic topic = topics.stream().filter(t -> t.getId() == id).findFirst().orElse(null);
         model.addAttribute("topic", topic);
-        return "topicView";
+        return "Topic/topicView";
     }
 
     @GetMapping("/topic/new")
@@ -77,12 +72,12 @@ public class HomeController {
         return "redirect:/topics";
     }
 
-
-
     @GetMapping("/students")
-    public String getStudents(Model model) {
+    public String getStudents(Model model, @RequestParam(value = "showAddForm", defaultValue = "false") boolean showAddForm) {
         model.addAttribute("students", students);
         model.addAttribute("content", "students");
+        model.addAttribute("newStudent", new Student(0, "", 0));
+        model.addAttribute("showAddForm", showAddForm);
         return "homePage";
     }
 
@@ -90,13 +85,7 @@ public class HomeController {
     public String viewStudent(@PathVariable("id") int id, Model model) {
         Student student = students.stream().filter(s -> s.getId() == id).findFirst().orElse(null);
         model.addAttribute("student", student);
-        return "studentView";
-    }
-
-    @GetMapping("/student/new")
-    public String addStudentForm(Model model) {
-        model.addAttribute("student", new Student(0, "", 0));
-        return "Student/studentAddnew"; 
+        return "Student/studentView";
     }
 
     @PostMapping("/student/save")
