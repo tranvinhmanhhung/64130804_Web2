@@ -1,16 +1,17 @@
 package controllers;
 
-import models.Topic;
-import org.springframework.ui.Model;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+@Controller
 public class HomeController {
     @RequestMapping("/")
-    public String dashBoard(Model model) {
+    public String dashBoard(ModelMap model) {
         model.addAttribute("mssv", "64130804");
-        model.addAttribute("hoten", "Trần Vĩnh Mạnh Hưng");
-        model.addAttribute("namsinh","2004" );
-        model.addAttribute("gioitinh", "Nam");
+        model.addAttribute("hoTen", "Trần Vĩnh Mạnh Hưng");
+        model.addAttribute("namSinh","2004" );
+        model.addAttribute("gioiTinh", "Nam");
         return "Dashboard";
     }
 }

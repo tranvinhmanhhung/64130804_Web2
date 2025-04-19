@@ -2,6 +2,7 @@ package controllers;
 
 
 import models.Topic;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import java.util.ArrayList;
 import java.util.List;
 
+@Controller
 public class TopicController {
     private final List<Topic> topics = new ArrayList<>();
 
