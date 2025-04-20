@@ -14,14 +14,15 @@
 <div class="main d-flex flex-grow-1" th:fragment="pSidebar">
     <div class="border-end p-3 bg-white">
         <div class="text-center mb-4">
-            <img th:src="@{/img.png}" alt="Logo" class="mb-3" style="max-height: 80px; width: 300px">
+            <img src="/img.png" alt="Logo" class="mb-3" style="max-height: 80px; width: 300px">
         </div>
         <ul class="nav flex-column gap-2">
             <li><a class="btn btn-outline-dark w-100 text-start" th:href="@{/}">Dashboard</a></li>
-            <li><a class="btn btn-outline-dark w-100 text-start" th:href="@{/topic/all}">Danh sách chủ đề</a></li>
-            <li><a class="btn btn-outline-dark w-100 text-start" th:href="@{/topic/new}">Thêm chủ đề</a></li>
-            <li><a class="btn btn-outline-dark w-100 text-start" th:href="@{/student/all}">Danh sách sinh viên</a></li>
-            <li><a class="btn btn-outline-dark w-100 text-start" th:href="@{/student/new}">Thêm sinh viên</a></li>
+            <li><a class="btn btn-outline-dark w-100 text-start" th:href="@{/topic/all}">Topic - List</a></li>
+            <li><a class="btn btn-outline-dark w-100 text-start " th:href="@{/topic/new}">Topic - Addnew</a></li>
+            <li><a class="btn btn-outline-dark w-100 text-start" style="height: 35px" th:href="@{/}">  </a></li>
+            <li><a class="btn btn-outline-dark w-100 text-start" th:href="@{/student/all}">Student - List</a></li>
+            <li><a class="btn btn-outline-dark w-100 text-start" th:href="@{/student/new}">Student - Addnew</a></li>
         </ul>
     </div>
 </div>

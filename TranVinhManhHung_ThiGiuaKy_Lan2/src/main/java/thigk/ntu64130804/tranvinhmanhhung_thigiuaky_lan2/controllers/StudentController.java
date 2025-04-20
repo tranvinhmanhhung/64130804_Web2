@@ -1,6 +1,6 @@
-package controllers;
+package thigk.ntu64130804.tranvinhmanhhung_thigiuaky_lan2.controllers;
 
-import models.Student;
+import thigk.ntu64130804.tranvinhmanhhung_thigiuaky_lan2.models.Student;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,11 +16,11 @@ public class StudentController {
     private final List<Student> students = new ArrayList<>();
 
     public StudentController() {
-        students.add(new Student("1", "Nguyen Van A", "Excellent student in Java programming", "1"));
-        students.add(new Student("2", "Tran Thi B", "Good performance in Spring Boot", "2"));
-        students.add(new Student("3", "Le Van C", "Skilled in Hibernate ORM", "2"));
-        students.add(new Student("4", "Pham Thi D", "Beginner but enthusiastic learner", "3"));
-        students.add(new Student("5", "Hoang Van E", "Outstanding web development project", "3"));
+        students.add(new Student("SV001", "Nguyen Van A", "G001"));
+        students.add(new Student("SV002", "Tran Thi B", "G002"));
+        students.add(new Student("SV003", "Le Van C", "G001"));
+        students.add(new Student("SV004", "Pham Thi D", "G003"));
+        students.add(new Student("SV005", "Hoang Van E", "G002"));
     }
 
     @GetMapping("/student/all")
@@ -62,15 +62,14 @@ public class StudentController {
     }
 
     @PostMapping("/student/edit/{id}")
-    public String postEditStudent(@PathVariable String id, @ModelAttribute Student updatedStudent) {
-        Student student = students.stream()
+    public String postEditStudent(@PathVariable String id, @ModelAttribute Student student) {
+        Student existingStudent = students.stream()
                 .filter(s -> s.getId().equals(id))
                 .findFirst()
                 .orElse(null);
-        if (student != null) {
-            student.setTitle(updatedStudent.getTitle());
-            student.setContent(updatedStudent.getContent());
-            student.setCategoryId(updatedStudent.getCategoryId());
+        if (existingStudent != null) {
+            existingStudent.setName(student.getName());
+            existingStudent.setGroupId(student.getGroupId());
         }
         return "redirect:/student/all";
     }

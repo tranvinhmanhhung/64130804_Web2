@@ -18,27 +18,25 @@
         <div th:replace="FrontEndLayout::pHeader"></div>
         <div class="container py-4 pe-5">
             <h1 class="mb-4">Edit Student</h1>
-
             <form th:action="@{/student/edit/{id}(id=${studentEdit.id})}" th:object="${studentEdit}" method="post" class="container mt-4">
                 <div class="mb-3">
                     <label for="id" class="form-label">ID:</label>
                     <input type="text" id="id" th:field="*{id}" class="form-control" disabled />
                 </div>
+
                 <div class="mb-3">
-                    <label for="title" class="form-label">Tiêu đề:</label>
-                    <input type="text" id="title" th:field="*{title}" class="form-control" required />
+                    <label for="name" class="form-label">Name:</label>
+                    <input type="text" id="name" th:field="*{name}" class="form-control" required />
                 </div>
+
                 <div class="mb-3">
-                    <label for="content" class="form-label">Nội dung:</label>
-                    <input type="text" id="content" th:field="*{content}" class="form-control" required />
+                    <label for="groupId" class="form-label">Group ID:</label>
+                    <input type="text" id="groupId" th:field="*{groupId}" class="form-control" required />
                 </div>
-                <div class="mb-3">
-                    <label for="categoryId" class="form-label">ID danh mục:</label>
-                    <input type="text" id="categoryId" th:field="*{categoryId}" class="form-control" required />
-                </div>
+
                 <div class="mt-4">
-                    <button type="submit" class="btn btn-success">Lưu thay đổi</button>
-                    <a href="/student/all" class="btn btn-secondary ms-2">Hủy</a>
+                    <button type="submit" class="btn btn-success">Save Changes</button>
+                    <a href="/student/all" class="btn btn-secondary ms-2">Cancel</a>
                 </div>
             </form>
         </div>

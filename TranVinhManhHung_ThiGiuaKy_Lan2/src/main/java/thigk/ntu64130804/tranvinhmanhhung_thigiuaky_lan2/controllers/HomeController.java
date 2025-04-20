@@ -1,4 +1,4 @@
-package controllers;
+package thigk.ntu64130804.tranvinhmanhhung_thigiuaky_lan2.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
