@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>hung.ntu64130804</groupId>
-	<artifactId>QuanLyKhoaHocOnline</artifactId>
+	<artifactId>QuanLyTruyen</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>QuanLyKhoaHocOnline</name>
 	<description>QuanLyKhoaHocOnline</description>
