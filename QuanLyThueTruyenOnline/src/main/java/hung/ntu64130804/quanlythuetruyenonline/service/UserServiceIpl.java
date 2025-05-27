@@ -15,21 +15,30 @@ public class UserServiceIpl implements UserService {
 
     @Override
     public List<User> findAll() {
+
         return userRepository.findAll();
     }
 
     @Override
     public Optional<User> findById(int id) {
+
         return userRepository.findById(id);
     }
 
     @Override
+    public Optional<User> findByName(String name) {
+        return userRepository.findByName(name);
+    }
+
+    @Override
     public void save(User user) {
+
         userRepository.save(user);
     }
 
     @Override
     public void deleteById(int id) {
+
         userRepository.deleteById(id);
     }
 }

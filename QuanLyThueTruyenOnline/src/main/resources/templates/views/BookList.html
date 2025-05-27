@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<div th:replace="fragments/header :: #header"></div>
+<body>
+<div th:replace="fragments/topbar :: #topbar"></div>
+<div id="layoutSidenav">
+    <div th:replace="fragments/sidebar :: #layoutSidenav_nav"></div>
+    <div id="layoutSidenav_content">
+        <main class="container-fluid px-4">
+            <h2 class="mt-4">Danh sách Truyện</h2>
+            <a class="btn btn-success my-3" th:href="@{/books/new}">➕ Tạo mới</a>
+            <div class="card mb-4">
+                <div class="card-body">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th>Mã Truyện</th>
+                            <th>Tiêu đề</th>
+                            <th>Tác giả</th>
+                            <th>Mô tả</th>
+                            <th>Thể loại</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="book : ${bookList}">
+                            <td th:text="${book.id}"></td>
+                            <td th:text="${book.title}"></td>
+                            <td th:text="${book.author}"></td>
+                            <td th:text="${book.description}"></td>
+                            <td th:text="${book.categoryName}"></td>
+                            <td>
+                                <a class="btn btn-sm btn-info" th:href="@{/books/view/{id}(id=${book.id})}">👁 Xem</a>
+                                <a class="btn btn-sm btn-warning" th:href="@{/books/edit/{id}(id=${book.id})}">✏️ Sửa</a>
+                                <a class="btn btn-sm btn-danger" th:href="@{/books/delete/{id}(id=${book.id})}"
+                                   onclick="return confirm('Confirm delete?')">❌ Xóa</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+        <div th:replace="fragments/footer :: #footer"></div>
+    </div>
+</div>
+</body>
+</html>

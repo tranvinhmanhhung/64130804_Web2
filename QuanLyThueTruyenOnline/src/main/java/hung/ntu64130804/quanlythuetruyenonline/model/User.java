@@ -22,5 +22,5 @@ public class User {
     private String role;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Book> books;
+    private List<Borrow> borrows;
 }

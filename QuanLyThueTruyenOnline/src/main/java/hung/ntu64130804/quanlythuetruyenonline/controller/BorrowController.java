@@ -1,22 +1,32 @@
 package hung.ntu64130804.quanlythuetruyenonline.controller;
 
 
+import hung.ntu64130804.quanlythuetruyenonline.model.Book;
 import hung.ntu64130804.quanlythuetruyenonline.model.Borrow;
 import hung.ntu64130804.quanlythuetruyenonline.model.User;
+import hung.ntu64130804.quanlythuetruyenonline.service.BookService;
 import hung.ntu64130804.quanlythuetruyenonline.service.BorrowService;
 import hung.ntu64130804.quanlythuetruyenonline.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
+@RequestMapping("/borrows")
 public class BorrowController {
+
     @Autowired
     private BorrowService borrowService;
+
+    @Autowired
+    private BookService bookService;
 
     @Autowired
     private UserService userService;
@@ -25,18 +35,74 @@ public class BorrowController {
     public String getAllBorrows(ModelMap model) {
         List<Borrow> borrowList = borrowService.findAll();
         model.addAttribute("borrowList", borrowList);
-        return "views/BorrowListAdmin";
+        return "views/BorrowListForAdmin";
     }
 
-    @GetMapping("/my")
-    public String getMyBorrows(HttpSession session, ModelMap model) {
-        User currentUser = (User) session.getAttribute("loggedInUser");
-        if (currentUser == null) {
+    @GetMapping("/user")
+    public String showBookList(ModelMap model) {
+        List<Book> bookList = bookService.findAll();
+        model.addAttribute("bookList", bookList);
+        return "views/BookListForUser";
+    }
+
+    @GetMapping("/borrow")
+    public String borrowBook(@RequestParam("bookId") int bookId, HttpSession session) {
+        User loggedInUser = (User) session.getAttribute("loggedInUser");
+        if (loggedInUser == null) {
             return "redirect:/login";
         }
 
-        List<Borrow> borrows = borrowService.findByUser(currentUser);
-        model.addAttribute("borrowList", borrows);
-        return "views/borrow/BorrowListUser";
+        Optional<Book> bookOpt = bookService.findById(bookId);
+        if (bookOpt.isPresent()) {
+            Borrow borrow = new Borrow();
+            borrow.setBook(bookOpt.get());
+            borrow.setUser(loggedInUser);
+            borrow.setStatus("pending");
+            borrow.setBorrowDate(java.time.LocalDate.now());
+            borrowService.save(borrow);
+        }
+
+        return "redirect:/borrows/user?success=true";
+    }
+
+    @GetMapping("/borrowed")
+    public String viewBorrowedBooks(HttpSession session, Model model) {
+        User loggedInUser = (User) session.getAttribute("loggedInUser");
+        if (loggedInUser == null) {
+            return "redirect:/login";
+        }
+
+        List<Borrow> borrowedList = borrowService.findByUser(loggedInUser);
+        model.addAttribute("borrowedList", borrowedList);
+
+        return "views/BorrowedList";
+    }
+
+    @PostMapping("/return")
+    public String returnBook(@RequestParam("borrowId") int borrowId, HttpSession session) {
+        User loggedInUser = (User) session.getAttribute("loggedInUser");
+        Optional<Borrow> borrowOpt = borrowService.findById(borrowId);
+        if (borrowOpt.isPresent()) {
+            Borrow borrow = borrowOpt.get();
+            if (borrow.getUser().getId() == loggedInUser.getId()) {
+                borrow.setReturnDate(LocalDate.now());
+                borrow.setStatus("returned");
+                borrowService.save(borrow);
+            }
+        }
+
+        return "redirect:/borrows/borrowed";
+    }
+
+
+    @GetMapping("/approve/{id}")
+    public String approveBorrow(@PathVariable("id") int id) {
+        Optional<Borrow> borrowOpt = borrowService.findById(id);
+        if (borrowOpt.isPresent()) {
+            Borrow borrow = borrowOpt.get();
+            borrow.setStatus("approved");
+            borrowService.save(borrow);
+        }
+        return "redirect:/borrows/admin";
     }
 }

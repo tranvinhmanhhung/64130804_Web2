@@ -14,6 +14,7 @@ import java.util.Optional;
 
 @Controller
 public class AuthController {
+
     @Autowired
     private AuthService authService;
 
@@ -26,39 +27,42 @@ public class AuthController {
         if (user.isPresent()) {
             session.setAttribute("loggedInUser", user.get());
             if ("admin".equalsIgnoreCase(user.get().getRole())) {
+                model.addAttribute("success", "Đăng nhập thành công!");
                 return "redirect:/dashboard";
             } else {
-                return "redirect:/index";
+                model.addAttribute("success", "Đăng nhập thành công!");
+                return "redirect:/borrows/user";
             }
         } else {
             model.addAttribute("error", "Sai tên đăng nhập hoặc mật khẩu");
-            return "redirect:/login";
+            return "login";
         }
     }
 
     @PostMapping("/register")
-    public String register(@RequestParam String username,
+    public String register(@RequestParam String name,
                            @RequestParam String email,
                            @RequestParam String password,
-                           @RequestParam String repeatPassword,
+                           @RequestParam String confirmPassword,
                            ModelMap model) {
-        if (!repeatPassword.equals(password)) {
+        if (!confirmPassword.equals(password)) {
             model.addAttribute("error", "Mật khẩu không khớp");
-            return "redirect:/register";
+            return "register";
         }
 
         User user = new User();
-        user.setName(username);
+        user.setName(name);
         user.setEmail(email);
         user.setPassword(password);
+        user.setRole("user");
 
         boolean result = authService.register(user);
         if (result) {
             model.addAttribute("success", "Đăng ký tài khoản thành công");
-            return "redirect:/login";
+            return "login";
         } else {
             model.addAttribute("error", "Email đã tồn tại");
-            return "redirect:/register";
+            return "register";
         }
     }
 
